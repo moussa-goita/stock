@@ -1,2 +1,7 @@
-package odk.kalanso.stock.entities;public class Admin {
+package odk.kalanso.stock.entities;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class Admin extends  User{
 }

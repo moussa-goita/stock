@@ -1,2 +1,18 @@
-package odk.kalanso.stock.entities;public class Fournisseur {
+package odk.kalanso.stock.entities;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Data;
+
+@Entity
+@Data
+public class Fournisseur {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    String nom;
+    String addresse;
+    String tel;
 }

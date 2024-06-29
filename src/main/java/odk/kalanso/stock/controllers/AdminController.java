@@ -3,14 +3,17 @@ package odk.kalanso.stock.controllers;
 import odk.kalanso.stock.entities.Admin;
 import odk.kalanso.stock.entities.Manager;
 import odk.kalanso.stock.entities.Role;
+import odk.kalanso.stock.entities.Vendeur;
 import odk.kalanso.stock.services.AdminService;
 import odk.kalanso.stock.services.ManagerService;
 import odk.kalanso.stock.services.RoleService;
+import odk.kalanso.stock.services.VendeurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("admin")
@@ -21,6 +24,8 @@ public class AdminController {
     private ManagerService managerService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private VendeurService vendeurService;
 
     @GetMapping("/all")
     public List<Admin> allAdmin(){
@@ -53,8 +58,8 @@ public class AdminController {
     }
     //Role
     @GetMapping("/role/{id}")
-    public List<Role> AllRoles() {
-        return roleService.AllRoles();
+    public Optional<Role> getRole(@PathVariable int id) {
+        return roleService.getRoleById(id);
     }
 
     //Create Role
@@ -63,6 +68,7 @@ public class AdminController {
         return roleService.createRole(role);
     }
 
+    //Modifier role
     @PutMapping("role/update/{id}/")
     public ResponseEntity<Role> updateRole(@PathVariable int id,
                                            @RequestBody Role roleDetails) {
@@ -74,6 +80,22 @@ public class AdminController {
         roleService.deleteRole(id);
         return ResponseEntity.noContent().build();
     }
+    //Manager
+    @GetMapping("/vendeur/all")
+    public List<Vendeur> allVendeur(){
+        return  vendeurService.allVendeurs();
+    }
+    //Creer manager
+    @PostMapping("/vendeur/create")
+    public Vendeur createVendeur(@RequestBody Vendeur vendeur){
+        return vendeurService.addVendeur(vendeur);
+    }
+//
+//    @PutMapping("/update/{id}")
+//    public Vendeur updateVendeur(@PathVariable Long id,
+//                             @RequestBody Vendeur vendeur) {
+//        return vendeurService.(id,admin);
+//    }
 
 }
 

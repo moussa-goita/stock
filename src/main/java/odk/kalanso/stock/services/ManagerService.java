@@ -26,25 +26,25 @@ public class ManagerService {
         manager.setRoles(Collections.singletonList(role));
         return managerRepository.save(manager);
     }
-//    public Admin deleteAdmin(int id){
-//        return adminRepository.deleteById(id);
-//    }
+    public void deleteAdmin(Long id){
+         managerRepository.deleteById(id);
+    }
 
     //update Admin
     public Manager updateManager(Long id, Manager manager) {
         if (managerRepository.existsById(id)) {
-            Manager existingAdmin = managerRepository.findById(id).orElse(null);
-            if (existingAdmin != null) {
-                if (manager.getUsername() != null && !manager.getUsername().equals(existingAdmin.getUsername())) {
-                    existingAdmin.setUsername(manager.getUsername());
+            Manager existingManager = managerRepository.findById(id).orElse(null);
+            if (existingManager != null) {
+                if (manager.getUsername() != null && !manager.getUsername().equals(existingManager.getUsername())) {
+                    existingManager.setUsername(manager.getUsername());
                 }
-                if (manager.getEmail() != null && !manager.getEmail().equals(existingAdmin.getEmail())) {
-                    existingAdmin.setEmail(manager.getEmail());
+                if (manager.getEmail() != null && !manager.getEmail().equals(existingManager.getEmail())) {
+                    existingManager.setEmail(manager.getEmail());
                 }
-                if (manager.getPwd() != null && ! existingAdmin.getPwd().equals(existingAdmin.getPwd())) {
-                    existingAdmin.setPwd(manager.getPwd());
+                if (manager.getPwd() != null && ! existingManager.getPwd().equals(existingManager.getPwd())) {
+                    existingManager.setPwd(manager.getPwd());
                 }
-                return managerRepository.save(existingAdmin);
+                return managerRepository.save(existingManager);
             }
         }
         return null;

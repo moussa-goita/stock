@@ -15,7 +15,7 @@ public class ProduitService {
     private ProduitRepository produitRepository;
 
     //Liste produits
-    public List<Produit> findAll() {
+    public List<Produit> listProduit() {
         return produitRepository.findAll();
     }
     // Get  Produit BY Id

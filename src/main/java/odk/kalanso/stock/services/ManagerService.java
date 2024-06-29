@@ -22,11 +22,11 @@ public class ManagerService {
         return managerRepository.findAll();
     }
     public Manager createManager(Manager manager){
-        Role role = roleRepository.findByName("Admin" ) ;
+        Role role = roleRepository.findByName("Manager" ) ;
         manager.setRoles(Collections.singletonList(role));
         return managerRepository.save(manager);
     }
-    public void deleteAdmin(Long id){
+    public void deleteManager(Long id){
          managerRepository.deleteById(id);
     }
 

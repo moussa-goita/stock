@@ -42,19 +42,24 @@ public class AdminController {
         return adminService.updateAdmin(id,admin);
     }
     //Manager
-    @GetMapping("/all")
+    @GetMapping("/manager/all")
     public List<Manager> allAManager(){
         return  managerService.allManager();
     }
-    @PostMapping("/create")
+    @PostMapping("manager/create")
     public Manager createManager(@RequestBody Manager manager){
         return managerService.createManager(manager);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("manager/update/{id}")
     public Manager updateManager(@PathVariable Long id,
                              @RequestBody Manager manager) {
         return managerService.updateManager(id,manager);
+    }
+    //delete Manager
+    @DeleteMapping("manager/delete/{id}")
+    public void deleteManager(@PathVariable long id){
+         managerService.deleteManager(id);
     }
     //Role
     @GetMapping("/role/{id}")
@@ -80,22 +85,33 @@ public class AdminController {
         roleService.deleteRole(id);
         return ResponseEntity.noContent().build();
     }
-    //Manager
+
+    //Vendeur
+
     @GetMapping("/vendeur/all")
     public List<Vendeur> allVendeur(){
         return  vendeurService.allVendeurs();
     }
-    //Creer manager
+
+    //Creer Vendeur
     @PostMapping("/vendeur/create")
     public Vendeur createVendeur(@RequestBody Vendeur vendeur){
         return vendeurService.addVendeur(vendeur);
     }
-//
-//    @PutMapping("/update/{id}")
-//    public Vendeur updateVendeur(@PathVariable Long id,
-//                             @RequestBody Vendeur vendeur) {
-//        return vendeurService.(id,admin);
-//    }
+
+    //updateVendeur
+    @PutMapping("vendeur/update/{id}")
+    public Vendeur updateVendeur(@PathVariable Long id, @RequestBody Vendeur vendeur) {
+
+        return vendeurService.updateVendeur(id, vendeur);
+    }
+
+    //delete VENDEUR
+    @DeleteMapping("/vendeur/delete/{id}")
+    public void deleteVendeur(@PathVariable long id){
+        managerService.deleteManager(id);
+    }
+
 
 }
 

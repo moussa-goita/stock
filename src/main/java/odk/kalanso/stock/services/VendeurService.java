@@ -37,4 +37,25 @@ public class VendeurService {
     public void deleteVendeur(){
         vendeurRepository.deleteAll();
     }
+
+    // Update Vendeur
+    public Vendeur updateVendeur(Long id, Vendeur vendeur) {
+        if (vendeurRepository.existsById(id)) {
+            Vendeur existingVendeur = vendeurRepository.findById(id).orElse(null);
+            if (existingVendeur != null) {
+                if (vendeur.getUsername() != null && !vendeur.getUsername().equals(existingVendeur.getUsername())) {
+                    existingVendeur.setUsername(vendeur.getUsername());
+                }
+                if (vendeur.getEmail() != null && !vendeur.getEmail().equals(existingVendeur.getEmail())) {
+                    existingVendeur.setEmail(vendeur.getEmail());
+                }
+                if (vendeur.getPwd() != null && ! existingVendeur.getPwd().equals(existingVendeur.getPwd())) {
+                    existingVendeur.setPwd(vendeur.getPwd());
+                }
+                return vendeurRepository.save(existingVendeur);
+            }
+        }
+        return null;
+    }
+
 }

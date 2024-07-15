@@ -1,5 +1,7 @@
 package odk.kalanso.stock.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,7 +14,11 @@ public class DetailsEntre {
     String prix;
     int qte;
     @ManyToOne
+    @JoinColumn(name = "bon_entre_id")
+    @JsonBackReference
     private BonEntre bonEntre;
-    @ManyToOne
-    private  Produit produit;
+    @OneToOne
+    private Produit produit;
+//    @ManyToOne
+//    private Motif motif;
 }

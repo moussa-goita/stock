@@ -1,5 +1,6 @@
 package odk.kalanso.stock.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,12 +13,16 @@ public class BonSortie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String motif;
     Date dateSortie;
     @OneToMany
+    @JsonManagedReference
     private List<DetailsSortie> detailsSorties;
     @ManyToOne
     private Manager manager;
     @ManyToOne
     private Admin admin;
+    @ManyToOne
+    private Notification notification;
+    @ManyToOne
+    private Motif motif;
 }

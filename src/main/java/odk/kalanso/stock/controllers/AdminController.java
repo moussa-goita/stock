@@ -1,13 +1,7 @@
 package odk.kalanso.stock.controllers;
 
-import odk.kalanso.stock.entities.Admin;
-import odk.kalanso.stock.entities.Manager;
-import odk.kalanso.stock.entities.Role;
-import odk.kalanso.stock.entities.Vendeur;
-import odk.kalanso.stock.services.AdminService;
-import odk.kalanso.stock.services.ManagerService;
-import odk.kalanso.stock.services.RoleService;
-import odk.kalanso.stock.services.VendeurService;
+import odk.kalanso.stock.entities.*;
+import odk.kalanso.stock.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +20,8 @@ public class AdminController {
     private RoleService roleService;
     @Autowired
     private VendeurService vendeurService;
+    @Autowired
+    private EntrepotService entrepotService;
 
     @GetMapping("/all")
     public List<Admin> allAdmin(){
@@ -112,6 +108,31 @@ public class AdminController {
         managerService.deleteManager(id);
     }
 
-
+    //Entrepot
+    //creer Entrepot
+    @PostMapping("/entrepot/create")
+    public Entrepot createEntrepot(@RequestBody Entrepot entrepot){
+        return entrepotService.createEntrepot(entrepot);
+    }
+    //get by Id
+    @GetMapping("entrepot/id")
+    public Optional<Entrepot> getEntrepotById(Long id){
+        return entrepotService.getEntrepotById(id);
+    }
+    //List des ENtrepot
+    @PostMapping("entrepot/list")
+    public List<Entrepot> listEntrepot(@RequestBody Entrepot entrepotList){
+        return entrepotService.getAllEntrepot();
+    }
+    //Modifier Entrepot
+    @PostMapping("entrepot/update/{id}")
+    public Entrepot updateEntrepot(@PathVariable int id, @RequestBody Entrepot entrepot) {
+        return entrepotService.updateEntrepot(entrepot, id);
+    }
+    //suprimer Entrepot
+    @DeleteMapping("entrepot/delete/{id}")
+    public void deleteEntrepot(@PathVariable long id) {
+        entrepotService.deleteEntrepot(id);
+    }
 }
 

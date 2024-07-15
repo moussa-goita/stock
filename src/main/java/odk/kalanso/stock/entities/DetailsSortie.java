@@ -1,5 +1,6 @@
 package odk.kalanso.stock.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,7 +16,7 @@ public class DetailsSortie {
     String qte;
     Date dateExpire;
 
-    @ManyToOne
+    @OneToOne
     private  Produit produit;
 
     @ManyToOne
@@ -23,6 +24,8 @@ public class DetailsSortie {
     @ManyToOne
     private Admin admin;
     @ManyToOne
+    @JsonBackReference
     private BonSortie bonSortie;
+
 
 }

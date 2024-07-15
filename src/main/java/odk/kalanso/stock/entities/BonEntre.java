@@ -1,5 +1,7 @@
 package odk.kalanso.stock.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,7 +15,8 @@ public class BonEntre {
     Long id;
     Date DateCommande;
     String Statut;
-    @OneToMany
+    @OneToMany(mappedBy = "bonEntre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<DetailsEntre> detailsEntres;
     @ManyToOne
     private Manager manager;
